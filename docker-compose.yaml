@@ -1,0 +1,29 @@
+version: '3.8'
+
+networks:
+  redis-network:
+    driver: bridge
+
+volumes:
+  redis-volume:
+
+services:
+  redis:
+    container_name: redis
+    #hostname: redis
+    image: redis:7.0.6
+    networks:
+      - redis-network
+    volumes:
+      - redis-volume:/db
+  redis-commander:
+    container_name: redis-commander
+    image: rediscommander/redis-commander:redis-commander-210
+    networks:
+      - redis-network
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOSTS: redis:6379
