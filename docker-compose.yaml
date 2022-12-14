@@ -10,12 +10,11 @@ volumes:
 services:
   redis:
     container_name: redis
-    #hostname: redis
     image: redis:7.0.6
     networks:
       - redis-network
     volumes:
-      - redis-volume:/db
+      - redis-volume:/data
   redis-commander:
     container_name: redis-commander
     image: rediscommander/redis-commander:redis-commander-210
@@ -26,4 +25,4 @@ services:
     depends_on:
       - redis
     environment:
-      REDIS_HOSTS: redis:6379
+      REDIS_HOSTS: local:redis:6379
