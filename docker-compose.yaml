@@ -3,9 +3,11 @@ version: '3.8'
 networks:
   redis-network:
     driver: bridge
+    name: redis-network
 
 volumes:
   redis-volume:
+    name: redis-volume
 
 services:
   redis:
